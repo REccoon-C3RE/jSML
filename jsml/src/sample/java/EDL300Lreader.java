@@ -98,7 +98,8 @@ public class EDL300Lreader {
 		else
 		{
 			Properties properties= loadProperties();
-			String level= properties.getProperty( "loglevel", "900");
+			// initialize log level
+			String level= properties.getProperty( "loglevel", "WARNING");
 			LOGGER.setLevel( Level.parse( level));
 		
 			// using IR-reader from project 'volkszaehler' (Udo) which is connected via USB
