@@ -149,7 +149,7 @@ public class EDL300Lreader {
 									LOGGER.info( "Tariff 2.8.0: " + data);
 									value_280= data;
 								}
-								else LOGGER.info( "Tariff not handled: " + ident);
+								else LOGGER.info( "Tariff not handled: " + ident + " - " + data);
 							}
 						}
 					}
