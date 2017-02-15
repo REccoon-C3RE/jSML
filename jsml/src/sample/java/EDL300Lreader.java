@@ -45,6 +45,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
 	read data from electricity meter EMH EDL300L
@@ -59,6 +61,8 @@ public class EDL300Lreader {
 	// public static String TARIFF_182= "0x01 0x00 0x01 0x08 0x02 0xff";
 	// public static String TARIFF_281= "0x01 0x00 0x02 0x08 0x01 0xff";
 	// public static String TARIFF_282= "0x01 0x00 0x02 0x08 0x02 0xff";
+	
+	private final static Logger LOGGER = Logger.getLogger( EDL300Lreader.class.getName());
 	
 	private static Properties loadProperties() throws IOException
 	{
@@ -94,7 +98,9 @@ public class EDL300Lreader {
 		else
 		{
 			Properties properties= loadProperties();
-			
+			String level= properties.getProperty( "loglevel", "900");
+			LOGGER.setLevel( Level.parse( level));
+		
 			// using IR-reader from project 'volkszaehler' (Udo) which is connected via USB
 			// http://wiki.volkszaehler.org/hardware/controllers/ir-schreib-lesekopf-usb-ausgang
 			SML_SerialReceiver receiver = new SML_SerialReceiver();
@@ -133,15 +139,15 @@ public class EDL300Lreader {
 								String ident= builder.toString().trim();
 								if (TARIFF_180.equals( ident))
 								{
-									System.out.println( "Tariff 1.8.0: " + data);
+									LOGGER.info( "Tariff 1.8.0: " + data);
 									value_180= data;
 								}
 								else if (TARIFF_280.equals( ident))
 								{
-									System.out.println( "Tariff 2.8.0: " + data);
+									LOGGER.info( "Tariff 2.8.0: " + data);
 									value_280= data;
 								}
-								else System.out.println( "Tariff not handled: " + ident);
+								else LOGGER.info( "Tariff not handled: " + ident);
 							}
 						}
 					}
@@ -160,7 +166,7 @@ public class EDL300Lreader {
 						System.out.println( "Insert into database: OK");
 					}
 					else
-						System.out.println( "No values written (value <= 0)");
+						LOGGER.warning( "No values written (value <= 0)");
 				}
 				else
 					usage(); // parameter unknown
