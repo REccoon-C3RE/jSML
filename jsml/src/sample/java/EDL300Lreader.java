@@ -98,6 +98,7 @@ public class EDL300Lreader {
 		else
 		{
 			Properties properties= loadProperties();
+			
 			// initialize log level
 			String level= properties.getProperty( "loglevel", "WARNING");
 			LOGGER.setLevel( Level.parse( level));
