@@ -87,6 +87,7 @@ public class EDL300Lreader {
 		builder.append( "see: http://wiki.c3re.de/index.php?title=Projekt_23_Smarthome_/_Zugriff_Stromz%C3%A4hler\n\n");
 		builder.append( "usage:\n");
 		builder.append("  database : insert into configured database (see config.properties)");
+		builder.append("  json:      'json' as format of output");
 		builder.append("\n\n");
 		System.out.println( builder);
 	}
