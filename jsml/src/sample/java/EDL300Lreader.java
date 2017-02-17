@@ -165,13 +165,14 @@ public class EDL300Lreader {
 				        Connection connection= DriverManager.getConnection( properties.getProperty( "database.mysql.connection"));
 						insertDatabase( connection, value_180, value_280);
 						connection.close();
-						System.out.println( "Insert into database: OK");
+						System.out.println( "Insert into database: 1.8.0=" + value_180 + " - 2.8.0=" + value_280);
 					}
 					else
 						LOGGER.warning( "No values written (value <= 0)");
 				}
-				else
-					usage(); // parameter unknown
+				if ("json".equals(s))
+					System.out.println( "{ \"timestamp:\" " + System.currentTimeMillis() 
+						+ " , \"1.8.0\": " + value_180 + " , \"2.8.0\": " + value_280 + " }");
 	        }
 		}
 	}
