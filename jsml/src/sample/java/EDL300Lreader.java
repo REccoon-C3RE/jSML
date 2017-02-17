@@ -171,7 +171,7 @@ public class EDL300Lreader {
 						LOGGER.warning( "No values written (value <= 0)");
 				}
 				if ("json".equals(s))
-					System.out.println( "{ \"timestamp:\" " + System.currentTimeMillis() 
+					System.out.println( "{ \"timestamp\": " + System.currentTimeMillis() 
 						+ " , \"1.8.0\": " + value_180 + " , \"2.8.0\": " + value_280 + " }");
 	        }
 		}
